@@ -22,7 +22,7 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewWillAppear(animated)
         self.control?.start()
         self.servoEnable(enable: true)
         NotificationCenter.default.addObserver(self, selector: #selector(connectionLost(_:)), name: Notification.Name(rawValue: "ConnectionLost"), object: nil)
