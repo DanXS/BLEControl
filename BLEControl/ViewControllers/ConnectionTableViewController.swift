@@ -59,7 +59,11 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
         serial?.stopScan()
         if indexPath.row < self.peripherals.count {
             self.selectedPeripheral = self.peripherals[indexPath.row].0
-            serial?.connectToPeripheral(self.selectedPeripheral!)
+            if serial != nil && !serial!.connectToPeripheral(self.selectedPeripheral!) {
+                let alert = UIAlertController(title: "Bluetooth is off", message: "Please enable it in settings", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 
@@ -77,6 +81,12 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
     
     func didDiscover(peripheral: CBPeripheral, rssi:NSNumber) {
         DispatchQueue.main.async {
+            for existing in self.peripherals {
+                // don't add the same peripheral twice
+                if peripheral.identifier == existing.0.identifier {
+                    return
+                }
+            }
             self.peripherals.append((peripheral, rssi))
             self.tableView.reloadData()
         }
@@ -90,13 +100,33 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
 
     func didFailToConnect(peripheral: CBPeripheral) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Connection failed", message: "Failed to connect to \(String(describing: peripheral.name))", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Connection failed", message: "Failed to connect to \(String(describing: peripheral.name!))", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
     
     func didDisconnect(peripheral: CBPeripheral) {
-        
+        let alert = UIAlertController(title: "Disconnected", message: "The peripheral \(String(describing: peripheral.name!)) has been disconnected", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+            self.notifyConnectionLost()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func didUpdateState(state: CBManagerState) {
+        if state != .poweredOn {
+            self.tableView.isUserInteractionEnabled = false
+        }
+        else {
+            self.tableView.isUserInteractionEnabled = true
+        }
+    }
+    
+    func notifyConnectionLost() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ConnectionLost")))
+        }
     }
     
     // MARK: - Navigation

@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="msa-SJ-H56"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9QZ-Xf-pW1">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Servo 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbL-ka-11u">
-                                <rect key="frame" x="16" y="20" width="70" height="21"/>
+                                <rect key="frame" x="16" y="40" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="x6N-N7-Z8Y"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Servo 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-xW-BhD">
-                                <rect key="frame" x="16" y="61" width="70" height="21"/>
+                                <rect key="frame" x="16" y="81" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="bhU-kM-WHI"/>
                                 </constraints>
@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Servo 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-Mr-lIS">
-                                <rect key="frame" x="16" y="102" width="70" height="21"/>
+                                <rect key="frame" x="16" y="122" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="gR3-pX-fLD"/>
                                 </constraints>
@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Servo 4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjh-rR-rGF">
-                                <rect key="frame" x="16" y="143" width="70" height="21"/>
+                                <rect key="frame" x="16" y="163" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="Ae9-cp-nKE"/>
                                 </constraints>
@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LCD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndo-kp-GQH">
-                                <rect key="frame" x="16" y="204" width="70" height="21"/>
+                                <rect key="frame" x="16" y="224" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="fbF-d4-udU"/>
                                 </constraints>
@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9z0-fg-dcB">
-                                <rect key="frame" x="16" y="245" width="70" height="21"/>
+                                <rect key="frame" x="16" y="265" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="Ddx-Ye-aO0"/>
                                 </constraints>
@@ -77,7 +77,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VH-ws-LmZ">
-                                <rect key="frame" x="16" y="286" width="70" height="21"/>
+                                <rect key="frame" x="16" y="306" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="tWd-52-6NQ"/>
                                 </constraints>
@@ -86,31 +86,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="xDa-3s-9hu">
-                                <rect key="frame" x="84" y="15" width="212" height="31"/>
+                                <rect key="frame" x="84" y="35" width="212" height="31"/>
                                 <connections>
                                     <action selector="onServo1SliderChanged:" destination="Ib7-q6-hbg" eventType="valueChanged" id="BlP-pI-OhB"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g41-hv-eww">
-                                <rect key="frame" x="84" y="56" width="212" height="31"/>
+                                <rect key="frame" x="84" y="76" width="212" height="31"/>
                                 <connections>
                                     <action selector="onServo2SliderChanged:" destination="Ib7-q6-hbg" eventType="valueChanged" id="wL6-pn-INJ"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VRF-uR-wAO">
-                                <rect key="frame" x="84" y="97" width="212" height="31"/>
+                                <rect key="frame" x="84" y="117" width="212" height="31"/>
                                 <connections>
                                     <action selector="onServo3SliderChanged:" destination="Ib7-q6-hbg" eventType="valueChanged" id="Lmj-3o-e8A"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4xh-Ll-WRZ">
-                                <rect key="frame" x="84" y="138" width="212" height="31"/>
+                                <rect key="frame" x="84" y="158" width="212" height="31"/>
                                 <connections>
                                     <action selector="onServo4SliderChanged:" destination="Ib7-q6-hbg" eventType="valueChanged" id="r0f-rV-rxO"/>
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubP-pQ-EWm">
-                                <rect key="frame" x="86" y="199" width="100" height="30"/>
+                                <rect key="frame" x="86" y="219" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="hAh-tt-Wui"/>
                                 </constraints>
@@ -120,7 +120,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S5f-2V-XuI">
-                                <rect key="frame" x="86" y="240" width="218" height="30"/>
+                                <rect key="frame" x="86" y="260" width="218" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="send"/>
@@ -130,7 +130,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="np0-F1-XTm">
-                                <rect key="frame" x="86" y="281" width="218" height="30"/>
+                                <rect key="frame" x="86" y="301" width="218" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="send"/>
@@ -179,6 +179,10 @@
                             <constraint firstItem="xDa-3s-9hu" firstAttribute="centerY" secondItem="XbL-ka-11u" secondAttribute="centerY" id="x9D-eo-S80"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lcdLine1TextField" destination="S5f-2V-XuI" id="bJb-Sw-KLp"/>
+                        <outlet property="lcdLine2TextField" destination="np0-F1-XTm" id="UGp-H9-J9z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZm-fg-fnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,6 +222,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="DZ7-j1-ded" id="YGe-0O-3Uk"/>
                             <outlet property="delegate" destination="DZ7-j1-ded" id="1oV-xV-duY"/>
@@ -232,7 +237,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Ib7-q6-hbg" kind="show" identifier="gotoControls" id="ctf-1E-GVK"/>
+                        <segue destination="Ib7-q6-hbg" kind="showDetail" identifier="gotoControls" action="showViewController:sender:" id="ctf-1E-GVK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Au6-HM-glo" userLabel="First Responder" sceneMemberID="firstResponder"/>

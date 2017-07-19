@@ -16,9 +16,11 @@ protocol BLESerialConnectionDelegate {
     func didConnect()
     func didFailToConnect(peripheral: CBPeripheral)
     func didDisconnect(peripheral: CBPeripheral)
+    // State change
+    func didUpdateState(state: CBManagerState)
 }
 
-class BLESerialConnection : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BLESerialConnection : NSObject, CBCentralManagerDelegate {
     
     var centralManager: CBCentralManager!
     var dispatchQueue: DispatchQueue?
@@ -48,8 +50,12 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate, CBPeripheralDele
         self.centralManager.stopScan()
     }
     
-    func connectToPeripheral(_ peripheral: CBPeripheral) {
+    func connectToPeripheral(_ peripheral: CBPeripheral) -> Bool {
+        guard self.centralManager.state == .poweredOn else {
+            return false
+        }
         centralManager.connect(peripheral, options: nil)
+        return true
     }
     
     func cancelPeripheralConnection(_ peripheral: CBPeripheral) {
@@ -60,7 +66,7 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate, CBPeripheralDele
     // MARK: CBCentralManagerDelegate mehods
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        
+        self.delegate.didUpdateState(state: central.state)
     }
     
     
@@ -79,69 +85,5 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate, CBPeripheralDele
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.delegate.didDisconnect(peripheral: peripheral)
     }
-    
-    // MARK: CBPeripheralDelegate methods
-    
-    func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
-        
-    }
-    
 
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        
-    }
-    
-
-    func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
-        
-    }
-    
-
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        
-    }
-    
-
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
-        
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: Error?) {
-        
-    }
 }

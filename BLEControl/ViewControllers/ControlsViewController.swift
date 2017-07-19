@@ -12,6 +12,9 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
 
     var control : BLEControl?
     
+    @IBOutlet weak var lcdLine1TextField: UITextField!
+    @IBOutlet weak var lcdLine2TextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let config = BLEDeviceConfig(maxServos: 4, maxLCDLines: 2)
@@ -22,10 +25,12 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
         super.viewWillDisappear(animated)
         self.control?.start()
         self.servoEnable(enable: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(connectionLost(_:)), name: Notification.Name(rawValue: "ConnectionLost"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         self.servoEnable(enable: false)
         self.control?.stop()
     }
@@ -33,6 +38,10 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func connectionLost(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func servoEnable(enable: Bool) {
@@ -59,6 +68,8 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClearButton(_ sender: UIButton) {
+        self.lcdLine1TextField.text = nil
+        self.lcdLine2TextField.text = nil
         self.control?.lcdClear()
     }
     
