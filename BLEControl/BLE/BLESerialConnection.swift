@@ -25,14 +25,12 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate {
     var centralManager: CBCentralManager!
     var dispatchQueue: DispatchQueue?
     
-    var serviceUUID = CBUUID(string: "FFE0")
-    var characteristicUUID = CBUUID(string: "FFE1")
     var delegate : BLESerialConnectionDelegate!
     
     init(delegate : BLESerialConnectionDelegate) {
         super.init()
         self.delegate = delegate
-        self.dispatchQueue = DispatchQueue(label: "BLEDispatchQueue")
+        self.dispatchQueue = DispatchQueue(label: "com.cuffedtothekeyboard.BLESerialConnection.BLEDispatchQueue")
         guard dispatchQueue != nil else {
             return
         }
@@ -43,7 +41,7 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate {
         guard self.centralManager.state == .poweredOn else {
             return
         }
-        self.centralManager.scanForPeripherals(withServices: [serviceUUID], options: nil)
+        self.centralManager.scanForPeripherals(withServices: [BLEUUID.serviceUUID], options: nil)
     }
     
     func stopScan() {

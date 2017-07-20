@@ -14,12 +14,13 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
     var serial : BLESerialConnection?
     var peripherals : [(CBPeripheral, NSNumber)] = []
     var selectedPeripheral : CBPeripheral?
+    var showDisconnectionWarning: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.serial = BLESerialConnection(delegate: self)
         guard self.serial != nil else {
-            assert(false, "could not instantiate BLSerial class")
+            assert(false, "Could not instantiate BLSerial class")
             return
         }
     }
@@ -69,6 +70,7 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
 
     @IBAction func onScan(_ sender: UIBarButtonItem) {
         if (self.selectedPeripheral != nil) {
+            self.showDisconnectionWarning = false
             serial?.cancelPeripheralConnection(self.selectedPeripheral!)
             self.selectedPeripheral = nil
         }
@@ -107,11 +109,14 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
     }
     
     func didDisconnect(peripheral: CBPeripheral) {
-        let alert = UIAlertController(title: "Disconnected", message: "The peripheral \(String(describing: peripheral.name!)) has been disconnected", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
-            self.notifyConnectionLost()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        if self.showDisconnectionWarning {
+            let alert = UIAlertController(title: "Disconnected", message: "The peripheral \(String(describing: peripheral.name!)) has been disconnected", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                self.notifyConnectionLost()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        self.showDisconnectionWarning = true
     }
     
     func didUpdateState(state: CBManagerState) {
@@ -131,16 +136,14 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "gotoControls" {
             guard segue.destination is ControlsViewController else {
                 assert(false, "Error retrieving destination vc")
                 return
             }
-            
+            let vc = segue.destination as! ControlsViewController
+            vc.peripheral = self.selectedPeripheral
         }
     }
 

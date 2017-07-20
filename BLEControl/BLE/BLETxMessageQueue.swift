@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BLETxMessageQueueDelegate {
-    func sendCommand(command : [UInt8])
+    func send(command : [UInt8])
 }
 
 class BLETxMessageQueue {
@@ -43,9 +43,7 @@ class BLETxMessageQueue {
                 self.serialQueue.sync {
                     if self.queue.count != 0 {
                         let command = self.queue.remove(at: 0)
-                        DispatchQueue.main.async {
-                            self.delegate.sendCommand(command: command)
-                        }
+                        self.delegate.send(command: command)
                     }
                     else if (self.done) {
                         exit = true

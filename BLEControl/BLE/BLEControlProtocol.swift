@@ -15,6 +15,7 @@ class BLEControlProtocol {
         case LCD_TEXT
         case LCD_CLEAR
         //...more to come
+
     }
     
     static func buildServoEnCmd(index : UInt8, enable: Bool) -> [UInt8] {

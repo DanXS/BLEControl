@@ -19,6 +19,7 @@
 		97CA42111F1E6D7B0068F88E /* BLESerialConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */; };
 		97CA42151F1E78FE0068F88E /* ConnectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42141F1E78FE0068F88E /* ConnectionTableViewController.swift */; };
 		97CA42171F1F63F60068F88E /* BLESerialPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */; };
+		97CA421C1F1FA9400068F88E /* BLEUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA421B1F1FA9400068F88E /* BLEUUID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESerialConnection.swift; sourceTree = "<group>"; };
 		97CA42141F1E78FE0068F88E /* ConnectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewController.swift; sourceTree = "<group>"; };
 		97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESerialPeripheral.swift; sourceTree = "<group>"; };
+		97CA421B1F1FA9400068F88E /* BLEUUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEUUID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		97CA42181F1F641D0068F88E /* BLE */ = {
 			isa = PBXGroup;
 			children = (
+				97CA421B1F1FA9400068F88E /* BLEUUID.swift */,
 				97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */,
 				97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */,
 				97CA420E1F1E52BC0068F88E /* BLEDeviceConfig.swift */,
@@ -188,6 +191,7 @@
 				97CA420D1F1E42C00068F88E /* BLETxMessageQueue.swift in Sources */,
 				97CA42091F1E28EC0068F88E /* BLEControl.swift in Sources */,
 				97CA42151F1E78FE0068F88E /* ConnectionTableViewController.swift in Sources */,
+				97CA421C1F1FA9400068F88E /* BLEUUID.swift in Sources */,
 				97CA42171F1F63F60068F88E /* BLESerialPeripheral.swift in Sources */,
 				97CA41F71F1E1C270068F88E /* AppDelegate.swift in Sources */,
 				97CA42111F1E6D7B0068F88E /* BLESerialConnection.swift in Sources */,
@@ -356,6 +360,7 @@
 				97CA42071F1E1C280068F88E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

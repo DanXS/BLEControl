@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class ControlsViewController: UIViewController, UITextFieldDelegate {
 
     var control : BLEControl?
+    var peripheral: CBPeripheral?
     
     @IBOutlet weak var lcdLine1TextField: UITextField!
     @IBOutlet weak var lcdLine2TextField: UITextField!
@@ -18,12 +20,15 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let config = BLEDeviceConfig(maxServos: 4, maxLCDLines: 2)
-        self.control = BLEControl(config: config)
+        guard self.peripheral != nil else {
+            assert(false, "Peripheral property must set on this view controller")
+            return
+        }
+        self.control = BLEControl(config: config, peripheral : self.peripheral!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.control?.start()
         self.servoEnable(enable: true)
         NotificationCenter.default.addObserver(self, selector: #selector(connectionLost(_:)), name: Notification.Name(rawValue: "ConnectionLost"), object: nil)
     }

@@ -9,71 +9,51 @@
 import Foundation
 import CoreBluetooth
 
+protocol BLESerialPeripheralDelegate {
+    func serialIsReady(peripheral : CBPeripheral)
+}
 
 class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     
+    let peripheral : CBPeripheral!
+    let delegate : BLESerialPeripheralDelegate!
+    var writeCharacteristic : CBCharacteristic?
+
+    init(peripheral : CBPeripheral, delegate: BLESerialPeripheralDelegate) {
+        self.peripheral = peripheral
+        self.delegate = delegate
+    }
+    
+    func discoverServices() {
+        self.peripheral.delegate = self
+        self.peripheral.discoverServices([BLEUUID.serviceUUID])
+    }
+    
+    func send(command: [UInt8]) {
+        let data = Data(bytes: command)
+        guard self.writeCharacteristic != nil else {
+            assert(false, "The writeCharacteristic not set - called too early?")
+            return
+        }
+        // using write type without response - (much faster)
+        peripheral.writeValue(data, for: self.writeCharacteristic!, type: .withoutResponse)
+    }
     
     // MARK: CBPeripheralDelegate methods
-    func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        
-    }
-    
-    
-    func peripheralDidUpdateRSSI(_ peripheral: CBPeripheral, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        
-    }
-    
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
+        for service in peripheral.services! {
+            peripheral.discoverCharacteristics([BLEUUID.characteristicUUID], for: service)
+        }
     }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
-        
-    }
-    
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-        
-    }
-    
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
-        
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: Error?) {
-        
+        for characteristic in service.characteristics! {
+            if characteristic.uuid == BLEUUID.characteristicUUID {
+                peripheral.setNotifyValue(true, for: characteristic)
+                self.writeCharacteristic = characteristic
+                delegate.serialIsReady(peripheral : peripheral)
+            }
+        }
     }
 }

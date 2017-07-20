@@ -8,11 +8,16 @@
 
 import Foundation
 
+import CoreBluetooth
 
-class BLEControl : BLETxMessageQueueDelegate {
+class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     var txQueue : BLETxMessageQueue?
     let config : BLEDeviceConfig!
+    var serial : BLESerialPeripheral?
+    var isReady : Bool
+    
+    // MARK: properties - note that setting these causes commands to be sent to the peripheral
     
     var servo : [Float?] {
         didSet {
@@ -26,13 +31,20 @@ class BLEControl : BLETxMessageQueueDelegate {
         }
     }
     
-    init(config: BLEDeviceConfig) {
+    // MARK: init with device config and peripheral
+    
+    init(config: BLEDeviceConfig, peripheral: CBPeripheral) {
+        self.isReady = false
         self.config = config
         self.servo = Array<Float?>(repeating: nil, count: config.maxServos)
         self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
+        self.serial = BLESerialPeripheral(peripheral: peripheral, delegate: self)
+        self.serial?.discoverServices()
     }
     
-    func start() {
+    // MARK: methods
+    
+    private func start() {
         self.txQueue = BLETxMessageQueue(delegate: self)
         self.txQueue?.startSending()
     }
@@ -47,6 +59,7 @@ class BLEControl : BLETxMessageQueueDelegate {
     }
     
     func lcdClear() {
+        self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
         let command = BLEControlProtocol.buildLCDClearCmd()
         self.txQueue?.enqueueCommand(command: command)
     }
@@ -69,9 +82,18 @@ class BLEControl : BLETxMessageQueueDelegate {
         }
     }
     
-    // BLETxMessageQueueDelegate methods
-    func sendCommand(command : [UInt8]) {
+    // MARK: BLETxMessageQueueDelegate methods
+    
+    func send(command : [UInt8]) {
         print("Sending \(command)")
+        serial?.send(command: command)
+    }
+    
+    // MARK: BLESerialPeripheralDelegate methods
+    
+    func serialIsReady(peripheral : CBPeripheral) {
+        self.isReady = true
+        self.start()
     }
     
 }
