@@ -32,7 +32,7 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     func send(command: [UInt8]) {
         let data = Data(bytes: command)
         guard self.writeCharacteristic != nil else {
-            assert(false, "The writeCharacteristic not set - called too early?")
+            assert(false, "The write characteristic not set - called too early?")
             return
         }
         // using write type without response - (much faster)

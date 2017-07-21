@@ -67,7 +67,6 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate {
         self.delegate.didUpdateState(state: central.state)
     }
     
-    
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         self.delegate.didDiscover(peripheral: peripheral, rssi: RSSI)
     }
