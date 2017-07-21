@@ -10,11 +10,11 @@ import Foundation
 
 class BLEDeviceConfig {
     
-    let maxServos : Int
+    let maxAnalogOut : Int
     let maxLCDLines : Int
     
-    init(maxServos: Int, maxLCDLines : Int) {
-        self.maxServos = maxServos
+    init(maxAnalogOut: Int, maxLCDLines : Int) {
+        self.maxAnalogOut = maxAnalogOut
         self.maxLCDLines = maxLCDLines
     }
 }

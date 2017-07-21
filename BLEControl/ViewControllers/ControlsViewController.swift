@@ -10,26 +10,27 @@ import UIKit
 import CoreBluetooth
 
 class ControlsViewController: UIViewController, UITextFieldDelegate {
-
-    var control : BLEControl?
+    
     var peripheral: CBPeripheral?
+    var control : BLEControl?
     
     @IBOutlet weak var lcdLine1TextField: UITextField!
     @IBOutlet weak var lcdLine2TextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let config = BLEDeviceConfig(maxServos: 4, maxLCDLines: 2)
+        let config = BLEDeviceConfig(maxAnalogOut: 8, maxLCDLines: 2)
         guard self.peripheral != nil else {
             assert(false, "Peripheral property must set on this view controller")
             return
         }
         self.control = BLEControl(config: config, peripheral : self.peripheral!)
+        self.control?.initDevice()
+        self.servoEnable(enable: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.servoEnable(enable: true)
         NotificationCenter.default.addObserver(self, selector: #selector(connectionLost(_:)), name: Notification.Name(rawValue: "ConnectionLost"), object: nil)
     }
     
@@ -50,10 +51,14 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func servoEnable(enable: Bool) {
-        self.control?.servoEnable(index: 0, enable: enable)
-        self.control?.servoEnable(index: 1, enable: enable)
-        self.control?.servoEnable(index: 2, enable: enable)
-        self.control?.servoEnable(index: 3, enable: enable)
+        self.control?.analogOutEnable(index: 0, enable: enable)
+        self.control?.analogOutEnable(index: 1, enable: enable)
+        self.control?.analogOutEnable(index: 2, enable: enable)
+        self.control?.analogOutEnable(index: 3, enable: enable)
+        self.control?.analogOutEnable(index: 4, enable: enable)
+        self.control?.analogOutEnable(index: 5, enable: enable)
+        self.control?.analogOutEnable(index: 6, enable: enable)
+        self.control?.analogOutEnable(index: 7, enable: enable)
     }
 
     @IBAction func onServo1SliderChanged(_ sender: UISlider) {
@@ -70,6 +75,22 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onServo4SliderChanged(_ sender: UISlider) {
         self.control?.servo[3] = sender.value
+    }
+    
+    @IBAction func onServo5SliderChanged(_ sender: UISlider) {
+        self.control?.pwm[4] = sender.value
+    }
+    
+    @IBAction func onServo6SliderChanged(_ sender: UISlider) {
+        self.control?.pwm[5] = sender.value
+    }
+    
+    @IBAction func onServo7SliderChanged(_ sender: UISlider) {
+        self.control?.pwm[6] = sender.value
+    }
+    
+    @IBAction func onServo8SliderChanged(_ sender: UISlider) {
+        self.control?.pwm[7] = sender.value
     }
     
     @IBAction func onClearButton(_ sender: UIButton) {

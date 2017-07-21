@@ -18,10 +18,12 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     let peripheral : CBPeripheral!
     let delegate : BLESerialPeripheralDelegate!
     var writeCharacteristic : CBCharacteristic?
+    var ready : Bool
 
     init(peripheral : CBPeripheral, delegate: BLESerialPeripheralDelegate) {
         self.peripheral = peripheral
         self.delegate = delegate
+        self.ready = false
     }
     
     func discoverServices() {
@@ -35,8 +37,16 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
             assert(false, "The write characteristic not set - called too early?")
             return
         }
-        // using write type without response - (much faster)
-        peripheral.writeValue(data, for: self.writeCharacteristic!, type: .withoutResponse)
+        DispatchQueue.global(qos: .userInitiated).async {
+            while(!self.ready) {}
+            if BLEControlProtocol.needsResponse(command: command[0]) {
+                self.peripheral.writeValue(data, for: self.writeCharacteristic!, type: .withResponse)
+                self.ready = false
+            }
+            else {
+                self.peripheral.writeValue(data, for: self.writeCharacteristic!, type: .withoutResponse)
+            }
+        }
     }
     
     // MARK: CBPeripheralDelegate methods
@@ -44,6 +54,7 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             peripheral.discoverCharacteristics([BLEUUID.characteristicUUID], for: service)
+            self.ready = true
         }
     }
     
@@ -55,5 +66,9 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
                 delegate.serialIsReady(peripheral : peripheral)
             }
         }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        self.ready = true
     }
 }

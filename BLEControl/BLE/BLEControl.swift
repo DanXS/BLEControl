@@ -25,6 +25,12 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
         }
     }
     
+    var pwm : [Float?] {
+        didSet {
+            self.postPWMProperties()
+        }
+    }
+    
     var lcdLine : [String?] {
         didSet {
             self.postLCDProperties()
@@ -36,8 +42,10 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     init(config: BLEDeviceConfig, peripheral: CBPeripheral) {
         self.isReady = false
         self.config = config
-        self.servo = Array<Float?>(repeating: nil, count: config.maxServos)
+        self.servo = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
+        self.pwm = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
         self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
+        self.txQueue = BLETxMessageQueue(delegate: self)
         self.serial = BLESerialPeripheral(peripheral: peripheral, delegate: self)
         self.serial?.discoverServices()
     }
@@ -45,7 +53,6 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     // MARK: methods
     
     private func start() {
-        self.txQueue = BLETxMessageQueue(delegate: self)
         self.txQueue?.startSending()
     }
     
@@ -53,8 +60,13 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
         self.txQueue?.stopSending()
     }
     
-    func servoEnable(index: Int, enable: Bool) {
-        let command = BLEControlProtocol.buildServoEnCmd(index: UInt8(index), enable: enable)
+    func initDevice() {
+        let command = BLEControlProtocol.buildInitCmd()
+        self.txQueue?.enqueueCommand(command: command)
+    }
+    
+    func analogOutEnable(index: Int, enable: Bool) {
+        let command = BLEControlProtocol.buildAnalogOutEnCmd(index: UInt8(index), enable: enable)
         self.txQueue?.enqueueCommand(command: command)
     }
     
@@ -65,9 +77,18 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     }
     
     private func postServoProperties() {
-        for i in 0..<self.config.maxServos {
+        for i in 0..<self.config.maxAnalogOut {
             if self.servo[i] != nil {
                 let command = BLEControlProtocol.buildServoCmd(index: UInt8(i), value: UInt16(self.servo[i]!*1000))
+                self.txQueue?.enqueueCommand(command: command)
+            }
+        }
+    }
+    
+    private func postPWMProperties() {
+        for i in 0..<self.config.maxAnalogOut {
+            if self.pwm[i] != nil {
+                let command = BLEControlProtocol.buildPWMCmd(index: UInt8(i), value: UInt16(self.pwm[i]!*1000))
                 self.txQueue?.enqueueCommand(command: command)
             }
         }
