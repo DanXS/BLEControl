@@ -5,12 +5,12 @@ This project aims to be a start at least into controlling devices via swift over
 
 So far the protocol has just these commands:
 
-INIT - Initialise the device (reset any pointers/buffers etc)
-ANALOG_OUT_EN - Enable analog out channels - here we have 8 of them, but that really depends on the device
-SERVO_VAL - Send a PWM value a signal pin for a servo or brushless motor signal via an ESC
-PWM_VAL - Send a PwM value to an analog output pin, e.g for led intensity or to drive a standard DC motor
-LCD_TEXT - Write a line of text to an LCD screen
-LCD_CLEAR - Clear the text
+* INIT - Initialise the device (reset any pointers/buffers etc)
+* ANALOG_OUT_EN - Enable analog out channels - here we have 8 of them, but that really depends on the device
+* SERVO_VAL - Send a PWM value a signal pin for a servo or brushless motor signal via an ESC
+* PWM_VAL - Send a PwM value to an analog output pin, e.g for led intensity or to drive a standard DC motor
+* LCD_TEXT - Write a line of text to an LCD screen
+* LCD_CLEAR - Clear the text
 
 Unfortunately for streaming applications Bluetooth Low Energy is not as fast as it could be I suppose because it is designed to send small commands in bursts to save power rather than continous streams of data through typical UART interfaces such as USB.  However it is nice to be able to control things remotely via your iPhone - think remote controlled robots, drones etc.
 
@@ -18,10 +18,12 @@ In order to make it as responsive as possible I have made some of the commands n
 
 The BLEControlProtocol class has a static needsResponse method which can be changed to specify which commands you want to be fast and which must be completed when sending to the BLE device.
 
+```swift
 static func needsResponse(command: UInt8) -> Bool {
     let fastCommands = [Command.SERVO_VAL.rawValue, Command.PWM_VAL.rawValue]
     return !(fastCommands.contains(command))
 }
+```
 
 The files in the BLE folder are the libray which implements the protocol and used CoreBluetooth to connect to the bluetooth device, send commands to the bluetooth device etc.
 
@@ -40,7 +42,7 @@ Command | Length | Data
 The BLEControlProtocol class has some static methods to build the various commands into an array of bytes what can then be sent to the device.
 
 For example:
-
+```swift
 static func buildServoCmd(index : UInt8, value: UInt16) -> [UInt8] {
     var msg : [UInt8] = []
     msg.append(Command.SERVO_VAL.rawValue) // The command
@@ -51,12 +53,15 @@ static func buildServoCmd(index : UInt8, value: UInt16) -> [UInt8] {
     msg.append(UInt8(value & 0xFF)) // The least significant byte for the control value
     return msg
 }
+```
 
 You do not need to call this directly however as it is called for you when you change the value of the servo property in the BLEControl class.  Essentially every time you change a value of a servo it will loop through all servo's with a non-null value in the array and create the command and send it to the device.  So in the example, changing a slider can automatically update the motor in a single line of code:
 
+```swift
 @IBAction func onServo1SliderChanged(_ sender: UISlider) {
     self.control?.servo[0] = sender.value
 }
+```
 
 The accompanying project for the STM32F401RE can be found here:
 
