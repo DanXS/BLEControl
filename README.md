@@ -67,4 +67,8 @@ The accompanying project for the STM32F401RE can be found here:
 
 https://github.com/DanXS/BLE_LCD_PWM
 
+Please also check out the youtube of it working:
+
+https://www.youtube.com/watch?v=zFuNHCO-w5U
+
 
