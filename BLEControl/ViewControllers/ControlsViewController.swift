@@ -77,19 +77,19 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
         self.control?.servo[3] = sender.value
     }
     
-    @IBAction func onServo5SliderChanged(_ sender: UISlider) {
+    @IBAction func onAnalog1SliderChanged(_ sender: UISlider) {
         self.control?.pwm[4] = sender.value
     }
     
-    @IBAction func onServo6SliderChanged(_ sender: UISlider) {
+    @IBAction func onAnalog2SliderChanged(_ sender: UISlider) {
         self.control?.pwm[5] = sender.value
     }
     
-    @IBAction func onServo7SliderChanged(_ sender: UISlider) {
+    @IBAction func onAnalog3SliderChanged(_ sender: UISlider) {
         self.control?.pwm[6] = sender.value
     }
     
-    @IBAction func onServo8SliderChanged(_ sender: UISlider) {
+    @IBAction func onAnalog4SliderChanged(_ sender: UISlider) {
         self.control?.pwm[7] = sender.value
     }
     
