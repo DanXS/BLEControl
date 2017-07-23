@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import BLEControlFramework
 
 class ConnectionTableViewController: UITableViewController, BLESerialConnectionDelegate {
 

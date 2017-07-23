@@ -10,7 +10,7 @@ import Foundation
 
 import CoreBluetooth
 
-class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
+public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     var txQueue : BLETxMessageQueue?
     let config : BLEDeviceConfig!
@@ -19,19 +19,19 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     // MARK: properties - note that setting these causes commands to be sent to the peripheral
     
-    var servo : [Float?] {
+    public var servo : [Float?] {
         didSet {
             self.postServoProperties()
         }
     }
     
-    var pwm : [Float?] {
+    public var pwm : [Float?] {
         didSet {
             self.postPWMProperties()
         }
     }
     
-    var lcdLine : [String?] {
+    public var lcdLine : [String?] {
         didSet {
             self.postLCDProperties()
         }
@@ -39,7 +39,7 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     // MARK: init with device config and peripheral
     
-    init(config: BLEDeviceConfig, peripheral: CBPeripheral) {
+    public init(config: BLEDeviceConfig, peripheral: CBPeripheral) {
         self.isReady = false
         self.config = config
         self.servo = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
@@ -56,21 +56,21 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
         self.txQueue?.startSending()
     }
     
-    func stop() {
+    public func stop() {
         self.txQueue?.stopSending()
     }
     
-    func initDevice() {
+    public func initDevice() {
         let command = BLEControlProtocol.buildInitCmd()
         self.txQueue?.enqueueCommand(command: command)
     }
     
-    func analogOutEnable(index: Int, enable: Bool) {
+    public func analogOutEnable(index: Int, enable: Bool) {
         let command = BLEControlProtocol.buildAnalogOutEnCmd(index: UInt8(index), enable: enable)
         self.txQueue?.enqueueCommand(command: command)
     }
     
-    func lcdClear() {
+    public func lcdClear() {
         self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
         let command = BLEControlProtocol.buildLCDClearCmd()
         self.txQueue?.enqueueCommand(command: command)
@@ -105,14 +105,14 @@ class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     // MARK: BLETxMessageQueueDelegate methods
     
-    func send(command : [UInt8]) {
+    public func send(command : [UInt8]) {
         print("Sending \(command)")
         serial?.send(command: command)
     }
     
     // MARK: BLESerialPeripheralDelegate methods
     
-    func serialIsReady(peripheral : CBPeripheral) {
+    public func serialIsReady(peripheral : CBPeripheral) {
         self.isReady = true
         self.start()
     }

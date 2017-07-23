@@ -20,7 +20,7 @@ class BLETxMessageQueue {
     var queue : [[UInt8]]!
     var done : Bool!
     
-    init (delegate : BLETxMessageQueueDelegate) {
+    public init(delegate : BLETxMessageQueueDelegate) {
         self.queue = []
         self.done = false
         self.delegate = delegate

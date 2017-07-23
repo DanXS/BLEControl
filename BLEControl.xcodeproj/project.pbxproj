@@ -7,22 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9777A0CA1F25165A00021A92 /* BLEControlFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9777A0C31F2513C000021A92 /* BLEControlFramework.framework */; };
+		9777A0CB1F25165A00021A92 /* BLEControlFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9777A0C31F2513C000021A92 /* BLEControlFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		97CA41F71F1E1C270068F88E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA41F61F1E1C270068F88E /* AppDelegate.swift */; };
 		97CA41F91F1E1C270068F88E /* ControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA41F81F1E1C270068F88E /* ControlsViewController.swift */; };
 		97CA41FC1F1E1C270068F88E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97CA41FA1F1E1C270068F88E /* Main.storyboard */; };
 		97CA41FE1F1E1C280068F88E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CA41FD1F1E1C280068F88E /* Assets.xcassets */; };
 		97CA42011F1E1C280068F88E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97CA41FF1F1E1C280068F88E /* LaunchScreen.storyboard */; };
-		97CA42091F1E28EC0068F88E /* BLEControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42081F1E28EC0068F88E /* BLEControl.swift */; };
-		97CA420B1F1E35EB0068F88E /* BLEControlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA420A1F1E35EB0068F88E /* BLEControlProtocol.swift */; };
-		97CA420D1F1E42C00068F88E /* BLETxMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA420C1F1E42C00068F88E /* BLETxMessageQueue.swift */; };
-		97CA420F1F1E52BC0068F88E /* BLEDeviceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA420E1F1E52BC0068F88E /* BLEDeviceConfig.swift */; };
-		97CA42111F1E6D7B0068F88E /* BLESerialConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */; };
 		97CA42151F1E78FE0068F88E /* ConnectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42141F1E78FE0068F88E /* ConnectionTableViewController.swift */; };
-		97CA42171F1F63F60068F88E /* BLESerialPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */; };
-		97CA421C1F1FA9400068F88E /* BLEUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA421B1F1FA9400068F88E /* BLEUUID.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9777A0C21F2513C000021A92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9777A0BE1F2513C000021A92 /* BLEControlFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9777A0A41F25041000021A92;
+			remoteInfo = BLEControlFramework;
+		};
+		9777A0CC1F25165A00021A92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9777A0BE1F2513C000021A92 /* BLEControlFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9777A0A31F25041000021A92;
+			remoteInfo = BLEControlFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9777A0CE1F25165B00021A92 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9777A0CB1F25165A00021A92 /* BLEControlFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9777A0BE1F2513C000021A92 /* BLEControlFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BLEControlFramework.xcodeproj; path = BLEControlFramework/BLEControlFramework.xcodeproj; sourceTree = "<group>"; };
 		97CA41F31F1E1C270068F88E /* BLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CA41F61F1E1C270068F88E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97CA41F81F1E1C270068F88E /* ControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewController.swift; sourceTree = "<group>"; };
@@ -30,14 +57,7 @@
 		97CA41FD1F1E1C280068F88E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97CA42001F1E1C280068F88E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97CA42021F1E1C280068F88E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		97CA42081F1E28EC0068F88E /* BLEControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEControl.swift; sourceTree = "<group>"; };
-		97CA420A1F1E35EB0068F88E /* BLEControlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEControlProtocol.swift; sourceTree = "<group>"; };
-		97CA420C1F1E42C00068F88E /* BLETxMessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETxMessageQueue.swift; sourceTree = "<group>"; };
-		97CA420E1F1E52BC0068F88E /* BLEDeviceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEDeviceConfig.swift; sourceTree = "<group>"; };
-		97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESerialConnection.swift; sourceTree = "<group>"; };
 		97CA42141F1E78FE0068F88E /* ConnectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewController.swift; sourceTree = "<group>"; };
-		97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESerialPeripheral.swift; sourceTree = "<group>"; };
-		97CA421B1F1FA9400068F88E /* BLEUUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEUUID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,15 +65,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9777A0CA1F25165A00021A92 /* BLEControlFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9777A0BF1F2513C000021A92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9777A0C31F2513C000021A92 /* BLEControlFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		97CA41EA1F1E1C270068F88E = {
 			isa = PBXGroup;
 			children = (
+				9777A0BE1F2513C000021A92 /* BLEControlFramework.xcodeproj */,
 				97CA41F51F1E1C270068F88E /* BLEControl */,
 				97CA41F41F1E1C270068F88E /* Products */,
 			);
@@ -71,27 +101,12 @@
 			isa = PBXGroup;
 			children = (
 				97CA41F61F1E1C270068F88E /* AppDelegate.swift */,
-				97CA42181F1F641D0068F88E /* BLE */,
 				97CA42191F1F64790068F88E /* ViewControllers */,
 				97CA421A1F1F649E0068F88E /* Storyboards */,
 				97CA41FD1F1E1C280068F88E /* Assets.xcassets */,
 				97CA42021F1E1C280068F88E /* Info.plist */,
 			);
 			path = BLEControl;
-			sourceTree = "<group>";
-		};
-		97CA42181F1F641D0068F88E /* BLE */ = {
-			isa = PBXGroup;
-			children = (
-				97CA421B1F1FA9400068F88E /* BLEUUID.swift */,
-				97CA42101F1E6D7B0068F88E /* BLESerialConnection.swift */,
-				97CA42161F1F63F60068F88E /* BLESerialPeripheral.swift */,
-				97CA420E1F1E52BC0068F88E /* BLEDeviceConfig.swift */,
-				97CA42081F1E28EC0068F88E /* BLEControl.swift */,
-				97CA420A1F1E35EB0068F88E /* BLEControlProtocol.swift */,
-				97CA420C1F1E42C00068F88E /* BLETxMessageQueue.swift */,
-			);
-			path = BLE;
 			sourceTree = "<group>";
 		};
 		97CA42191F1F64790068F88E /* ViewControllers */ = {
@@ -122,10 +137,12 @@
 				97CA41EF1F1E1C270068F88E /* Sources */,
 				97CA41F01F1E1C270068F88E /* Frameworks */,
 				97CA41F11F1E1C270068F88E /* Resources */,
+				9777A0CE1F25165B00021A92 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9777A0CD1F25165A00021A92 /* PBXTargetDependency */,
 			);
 			name = BLEControl;
 			productName = BLEControl;
@@ -160,12 +177,28 @@
 			mainGroup = 97CA41EA1F1E1C270068F88E;
 			productRefGroup = 97CA41F41F1E1C270068F88E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9777A0BF1F2513C000021A92 /* Products */;
+					ProjectRef = 9777A0BE1F2513C000021A92 /* BLEControlFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				97CA41F21F1E1C270068F88E /* BLEControl */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9777A0C31F2513C000021A92 /* BLEControlFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BLEControlFramework.framework;
+			remoteRef = 9777A0C21F2513C000021A92 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		97CA41F11F1E1C270068F88E /* Resources */ = {
@@ -186,19 +219,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				97CA41F91F1E1C270068F88E /* ControlsViewController.swift in Sources */,
-				97CA420F1F1E52BC0068F88E /* BLEDeviceConfig.swift in Sources */,
-				97CA420B1F1E35EB0068F88E /* BLEControlProtocol.swift in Sources */,
-				97CA420D1F1E42C00068F88E /* BLETxMessageQueue.swift in Sources */,
-				97CA42091F1E28EC0068F88E /* BLEControl.swift in Sources */,
 				97CA42151F1E78FE0068F88E /* ConnectionTableViewController.swift in Sources */,
-				97CA421C1F1FA9400068F88E /* BLEUUID.swift in Sources */,
-				97CA42171F1F63F60068F88E /* BLESerialPeripheral.swift in Sources */,
 				97CA41F71F1E1C270068F88E /* AppDelegate.swift in Sources */,
-				97CA42111F1E6D7B0068F88E /* BLESerialConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9777A0CD1F25165A00021A92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BLEControlFramework;
+			targetProxy = 9777A0CC1F25165A00021A92 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		97CA41FA1F1E1C270068F88E /* Main.storyboard */ = {
@@ -318,6 +352,7 @@
 		97CA42061F1E1C280068F88E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KJW5SEM824;
 				INFOPLIST_FILE = BLEControl/Info.plist;
@@ -331,6 +366,7 @@
 		97CA42071F1E1C280068F88E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KJW5SEM824;
 				INFOPLIST_FILE = BLEControl/Info.plist;

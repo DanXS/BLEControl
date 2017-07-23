@@ -9,18 +9,18 @@
 import Foundation
 import CoreBluetooth
 
-protocol BLESerialPeripheralDelegate {
+public protocol BLESerialPeripheralDelegate {
     func serialIsReady(peripheral : CBPeripheral)
 }
 
-class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
+public class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     
     let peripheral : CBPeripheral!
     let delegate : BLESerialPeripheralDelegate!
     var writeCharacteristic : CBCharacteristic?
     var ready : Bool
 
-    init(peripheral : CBPeripheral, delegate: BLESerialPeripheralDelegate) {
+    public init(peripheral : CBPeripheral, delegate: BLESerialPeripheralDelegate) {
         self.peripheral = peripheral
         self.delegate = delegate
         self.ready = false
@@ -51,14 +51,14 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
     
     // MARK: CBPeripheralDelegate methods
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             peripheral.discoverCharacteristics([BLEUUID.characteristicUUID], for: service)
             self.ready = true
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         for characteristic in service.characteristics! {
             if characteristic.uuid == BLEUUID.characteristicUUID {
                 peripheral.setNotifyValue(true, for: characteristic)
@@ -68,7 +68,7 @@ class BLESerialPeripheral : NSObject, CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         self.ready = true
     }
 }

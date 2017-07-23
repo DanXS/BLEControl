@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class BLEControlProtocol {
+public class BLEControlProtocol {
     
     enum Command : UInt8 {
         case INIT = 0

@@ -8,12 +8,12 @@
 
 import Foundation
 
-class BLEDeviceConfig {
+public class BLEDeviceConfig {
     
     let maxAnalogOut : Int
     let maxLCDLines : Int
     
-    init(maxAnalogOut: Int, maxLCDLines : Int) {
+    public init(maxAnalogOut: Int, maxLCDLines : Int) {
         self.maxAnalogOut = maxAnalogOut
         self.maxLCDLines = maxLCDLines
     }

@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-protocol BLESerialConnectionDelegate {
+public protocol BLESerialConnectionDelegate {
     // Discovery
     func didDiscover(peripheral : CBPeripheral, rssi : NSNumber)
     // Connection
@@ -20,14 +20,14 @@ protocol BLESerialConnectionDelegate {
     func didUpdateState(state: CBManagerState)
 }
 
-class BLESerialConnection : NSObject, CBCentralManagerDelegate {
+public class BLESerialConnection : NSObject, CBCentralManagerDelegate {
     
     var centralManager: CBCentralManager!
     var dispatchQueue: DispatchQueue?
     
     var delegate : BLESerialConnectionDelegate!
     
-    init(delegate : BLESerialConnectionDelegate) {
+    public init(delegate : BLESerialConnectionDelegate) {
         super.init()
         self.delegate = delegate
         self.dispatchQueue = DispatchQueue(label: "com.cuffedtothekeyboard.BLESerialConnection.BLEDispatchQueue")
@@ -37,18 +37,18 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate {
         self.centralManager = CBCentralManager(delegate: self, queue: self.dispatchQueue)
     }
     
-    func startScan() {
+    public func startScan() {
         guard self.centralManager.state == .poweredOn else {
             return
         }
         self.centralManager.scanForPeripherals(withServices: [BLEUUID.serviceUUID], options: nil)
     }
     
-    func stopScan() {
+    public func stopScan() {
         self.centralManager.stopScan()
     }
     
-    func connectToPeripheral(_ peripheral: CBPeripheral) -> Bool {
+    public func connectToPeripheral(_ peripheral: CBPeripheral) -> Bool {
         guard self.centralManager.state == .poweredOn else {
             return false
         }
@@ -56,30 +56,30 @@ class BLESerialConnection : NSObject, CBCentralManagerDelegate {
         return true
     }
     
-    func cancelPeripheralConnection(_ peripheral: CBPeripheral) {
+    public func cancelPeripheralConnection(_ peripheral: CBPeripheral) {
         centralManager.cancelPeripheralConnection(peripheral)
     }
     
     
     // MARK: CBCentralManagerDelegate mehods
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         self.delegate.didUpdateState(state: central.state)
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         self.delegate.didDiscover(peripheral: peripheral, rssi: RSSI)
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         self.delegate.didConnect()
     }
     
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         self.delegate.didFailToConnect(peripheral: peripheral)
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.delegate.didDisconnect(peripheral: peripheral)
     }
 
