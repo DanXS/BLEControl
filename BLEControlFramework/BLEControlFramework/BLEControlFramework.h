@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 //! Project version number for BLEControlFramework.
 FOUNDATION_EXPORT double BLEControlFrameworkVersionNumber;
@@ -14,5 +15,5 @@ FOUNDATION_EXPORT double BLEControlFrameworkVersionNumber;
 //! Project version string for BLEControlFramework.
 FOUNDATION_EXPORT const unsigned char BLEControlFrameworkVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <BLEControlFramework/PublicHeader.h>
+
 

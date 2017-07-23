@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreBluetooth
 import BLEControlFramework
 
 class ControlsViewController: UIViewController, UITextFieldDelegate {
