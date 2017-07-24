@@ -15,6 +15,7 @@
 		9777A0BB1F2508D700021A92 /* BLESerialPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9777A0B41F2508D700021A92 /* BLESerialPeripheral.swift */; };
 		9777A0BC1F2508D700021A92 /* BLETxMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9777A0B51F2508D700021A92 /* BLETxMessageQueue.swift */; };
 		9777A0BD1F2508D700021A92 /* BLEUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9777A0B61F2508D700021A92 /* BLEUUID.swift */; };
+		97D6CC841F254C4F007A71F5 /* BLERxMessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D6CC831F254C4F007A71F5 /* BLERxMessageQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9777A0B41F2508D700021A92 /* BLESerialPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESerialPeripheral.swift; sourceTree = "<group>"; };
 		9777A0B51F2508D700021A92 /* BLETxMessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETxMessageQueue.swift; sourceTree = "<group>"; };
 		9777A0B61F2508D700021A92 /* BLEUUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEUUID.swift; sourceTree = "<group>"; };
+		97D6CC831F254C4F007A71F5 /* BLERxMessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLERxMessageQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				9777A0B21F2508D700021A92 /* BLEDeviceConfig.swift */,
 				9777A0B31F2508D700021A92 /* BLESerialConnection.swift */,
 				9777A0B41F2508D700021A92 /* BLESerialPeripheral.swift */,
+				97D6CC831F254C4F007A71F5 /* BLERxMessageQueue.swift */,
 				9777A0B51F2508D700021A92 /* BLETxMessageQueue.swift */,
 				9777A0B61F2508D700021A92 /* BLEUUID.swift */,
 			);
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9777A0B71F2508D700021A92 /* BLEControl.swift in Sources */,
+				97D6CC841F254C4F007A71F5 /* BLERxMessageQueue.swift in Sources */,
 				9777A0B91F2508D700021A92 /* BLEDeviceConfig.swift in Sources */,
 				9777A0B81F2508D700021A92 /* BLEControlProtocol.swift in Sources */,
 				9777A0BC1F2508D700021A92 /* BLETxMessageQueue.swift in Sources */,

@@ -17,8 +17,17 @@ public class BLEControlProtocol {
         case LCD_TEXT
         case LCD_CLEAR
         //...more to come
-
+        case UNKNOWN = 255
     }
+    
+    static let commandNames : [String] = [
+        "Init",
+        "Analog out enable",
+        "Servo value",
+        "PWM Value",
+        "LCD Text",
+        "LCD Clear",
+    ]
     
     static func buildInitCmd() -> [UInt8] {
         var msg : [UInt8] = []
@@ -78,6 +87,11 @@ public class BLEControlProtocol {
     static func needsResponse(command: UInt8) -> Bool {
         let fastCommands = [Command.SERVO_VAL.rawValue, Command.PWM_VAL.rawValue]
         return !(fastCommands.contains(command))
+    }
+    
+    static func errorMessageForUnknown(command: UInt8) -> String {
+        assert(Int(command) < commandNames.count, "Command does not exist in protocol")
+        return "Error: device does not understand command \(BLEControlProtocol.commandNames[Int(command)])"
     }
     
 }

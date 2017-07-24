@@ -9,7 +9,7 @@
 import UIKit
 import BLEControlFramework
 
-class ControlsViewController: UIViewController, UITextFieldDelegate {
+class ControlsViewController: UIViewController, UITextFieldDelegate, BLEControlDelegate {
     
     var peripheral: CBPeripheral?
     var control : BLEControl?
@@ -24,7 +24,7 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
             assert(false, "Peripheral property must set on this view controller")
             return
         }
-        self.control = BLEControl(config: config, peripheral : self.peripheral!)
+        self.control = BLEControl(config: config, peripheral : self.peripheral!, delegate: self)
         self.control?.initDevice()
         self.servoEnable(enable: true)
     }
@@ -112,6 +112,11 @@ class ControlsViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // MARK: BLEControlDelegate method
+    
+    func deviceError(message : String) {
+        print(message)
+    }
     
 }
 

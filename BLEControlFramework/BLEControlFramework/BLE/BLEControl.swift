@@ -10,11 +10,16 @@ import Foundation
 
 import CoreBluetooth
 
+public protocol BLEControlDelegate {
+    func deviceError(message : String)
+}
+
 public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate {
     
     var txQueue : BLETxMessageQueue?
     let config : BLEDeviceConfig!
     var serial : BLESerialPeripheral?
+    var delegate : BLEControlDelegate!
     var isReady : Bool
     
     // MARK: properties - note that setting these causes commands to be sent to the peripheral
@@ -39,9 +44,10 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
     
     // MARK: init with device config and peripheral
     
-    public init(config: BLEDeviceConfig, peripheral: CBPeripheral) {
+    public init(config: BLEDeviceConfig, peripheral: CBPeripheral, delegate: BLEControlDelegate) {
         self.isReady = false
         self.config = config
+        self.delegate = delegate
         self.servo = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
         self.pwm = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
         self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
@@ -58,6 +64,7 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
     
     public func stop() {
         self.txQueue?.stopSending()
+        self.serial?.stopRecieving();
     }
     
     public func initDevice() {
@@ -115,6 +122,14 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
     public func serialIsReady(peripheral : CBPeripheral) {
         self.isReady = true
         self.start()
+    }
+    
+    public func errorOccured(message: String) {
+        self.delegate.deviceError(message : message)
+    }
+    
+    public func received(data : [UInt8]) {
+        // todo: parse the received message and pass it on via delegates
     }
     
 }
