@@ -90,8 +90,12 @@ public class BLEControlProtocol {
     }
     
     static func errorMessageForUnknown(command: UInt8) -> String {
-        assert(Int(command) < commandNames.count, "Command does not exist in protocol")
-        return "Error: device does not understand command \(BLEControlProtocol.commandNames[Int(command)])"
+        if (Int(command) < commandNames.count) {
+            return "Error: device does not understand command \(BLEControlProtocol.commandNames[Int(command)])"
+        }
+        else {
+            return "Error: command of value \(command) does not exist in protocol"
+        }
     }
     
 }

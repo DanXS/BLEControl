@@ -44,6 +44,8 @@ class BLETxMessageQueue {
                     if self.queue.count != 0 {
                         let command = self.queue.remove(at: 0)
                         self.delegate.send(command: command)
+                        // sleep the thread a bit to give reciever time to handle message
+                        usleep(20000)
                     }
                     else if (self.done) {
                         exit = true
