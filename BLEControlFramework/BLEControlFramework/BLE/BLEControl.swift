@@ -95,7 +95,7 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
     private func postPWMProperties() {
         for i in 0..<self.config.maxAnalogOut {
             if self.pwm[i] != nil {
-                let command = BLEControlProtocol.buildPWMCmd(index: UInt8(i), value: UInt16(self.pwm[i]!*1000))
+                let command = BLEControlProtocol.buildPWMCmd(index: UInt8(i), value: Int16(self.pwm[i]!*1000))
                 self.txQueue?.enqueueCommand(command: command)
             }
         }

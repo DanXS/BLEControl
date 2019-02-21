@@ -55,7 +55,7 @@ public class BLEControlProtocol {
         return msg
     }
     
-    static func buildPWMCmd(index : UInt8, value: UInt16) -> [UInt8] {
+    static func buildPWMCmd(index : UInt8, value: Int16) -> [UInt8] {
         var msg : [UInt8] = []
         msg.append(Command.PWM_VAL.rawValue)
         msg.append(UInt8(3))
