@@ -19,7 +19,7 @@ class ControlsViewController: UIViewController, UITextFieldDelegate, BLEControlD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let config = BLEDeviceConfig(maxAnalogOut: 8, maxLCDLines: 2)
+        let config = BLEDeviceConfig(maxAnalogOut: 8, maxLCDLines: 2, maxSwitches: 4)
         guard self.peripheral != nil else {
             assert(false, "Peripheral property must set on this view controller")
             return
@@ -91,6 +91,22 @@ class ControlsViewController: UIViewController, UITextFieldDelegate, BLEControlD
     
     @IBAction func onAnalog4SliderChanged(_ sender: UISlider) {
         self.control?.pwm[7] = sender.value
+    }
+    
+    @IBAction func switch1Changed(_ sender: UISwitch) {
+        self.control?.switches[0] = sender.isOn
+    }
+    
+    @IBAction func switch2Changed(_ sender: UISwitch) {
+        self.control?.switches[1] = sender.isOn
+    }
+    
+    @IBAction func switch3Changed(_ sender: UISwitch) {
+        self.control?.switches[2] = sender.isOn
+    }
+    
+    @IBAction func Switch4Changed(_ sender: UISwitch) {
+        self.control?.switches[3] = sender.isOn
     }
     
     @IBAction func onClearButton(_ sender: UIButton) {

@@ -16,17 +16,19 @@ public class BLEControlProtocol {
         case PWM_VAL
         case LCD_TEXT
         case LCD_CLEAR
+        case SWITCH_VAL
         //...more to come
         case UNKNOWN = 255
     }
     
     static let commandNames : [String] = [
         "Init",
-        "Analog out enable",
-        "Servo value",
+        "Analog Out Enable",
+        "Servo Value",
         "PWM Value",
         "LCD Text",
         "LCD Clear",
+        "Switch Value"
     ]
     
     static func buildInitCmd() -> [UInt8] {
@@ -65,6 +67,15 @@ public class BLEControlProtocol {
         return msg
     }
     
+    static func buildSwitchCmd(index : UInt8, value: Bool) -> [UInt8] {
+        var msg : [UInt8] = []
+        msg.append(Command.SWITCH_VAL.rawValue)
+        msg.append(UInt8(2))
+        msg.append(index)
+        msg.append(UInt8(value ? 1 : 0))
+        return msg
+    }
+    
     static func buildLCDCmd(index : UInt8, value: String) -> [UInt8] {
         assert(value.count <= 200, "Cannot send strings longer than 200 characters")
         var msg : [UInt8] = []
@@ -85,7 +96,7 @@ public class BLEControlProtocol {
     }
     
     static func needsResponse(command: UInt8) -> Bool {
-        let fastCommands = [Command.SERVO_VAL.rawValue, Command.PWM_VAL.rawValue]
+        let fastCommands = [Command.SERVO_VAL.rawValue, Command.PWM_VAL.rawValue, Command.SWITCH_VAL.rawValue]
         return !(fastCommands.contains(command))
     }
     

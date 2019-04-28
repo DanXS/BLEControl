@@ -12,9 +12,11 @@ public class BLEDeviceConfig {
     
     let maxAnalogOut : Int
     let maxLCDLines : Int
+    let maxSwitches : Int
     
-    public init(maxAnalogOut: Int, maxLCDLines : Int) {
+    public init(maxAnalogOut: Int, maxLCDLines : Int, maxSwitches: Int) {
         self.maxAnalogOut = maxAnalogOut
         self.maxLCDLines = maxLCDLines
+        self.maxSwitches = maxSwitches
     }
 }

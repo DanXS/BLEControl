@@ -17,7 +17,6 @@ public protocol BLESerialPeripheralDelegate {
 
 class BLESerialPeripheral : NSObject, CBPeripheralDelegate, BLERxMessageQueueDelegate {
     
-   
     let peripheral : CBPeripheral!
     let delegate : BLESerialPeripheralDelegate!
     var characteristic : CBCharacteristic?

@@ -36,6 +36,12 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
         }
     }
     
+    public var switches : [Bool?] {
+        didSet {
+            self.postSwitchProperties()
+        }
+    }
+    
     public var lcdLine : [String?] {
         didSet {
             self.postLCDProperties()
@@ -51,6 +57,7 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
         self.servo = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
         self.pwm = Array<Float?>(repeating: nil, count: config.maxAnalogOut)
         self.lcdLine = Array<String?>(repeating: nil, count: config.maxLCDLines)
+        self.switches = Array<Bool?>(repeating: nil, count: config.maxSwitches)
         self.txQueue = BLETxMessageQueue(delegate: self)
         self.serial = BLESerialPeripheral(peripheral: peripheral, delegate: self)
         self.serial?.discoverServices()
@@ -100,6 +107,16 @@ public class BLEControl : BLETxMessageQueueDelegate, BLESerialPeripheralDelegate
             }
         }
     }
+    
+    private func postSwitchProperties() {
+        for i in 0..<self.config.maxSwitches {
+            if self.switches[i] != nil {
+                let command = BLEControlProtocol.buildSwitchCmd(index: UInt8(i), value: self.switches[i]!)
+                self.txQueue?.enqueueCommand(command: command)
+            }
+        }
+    }
+    
     
     private func postLCDProperties() {
         for i in 0..<self.config.maxLCDLines {
