@@ -120,11 +120,14 @@ class ConnectionTableViewController: UITableViewController, BLESerialConnectionD
     }
     
     func didUpdateState(state: CBManagerState) {
-        if state != .poweredOn {
-            self.tableView.isUserInteractionEnabled = false
-        }
-        else {
-            self.tableView.isUserInteractionEnabled = true
+        DispatchQueue.main.async {
+            if state != .poweredOn {
+                self.tableView.isUserInteractionEnabled = false
+                
+            }
+            else {
+                self.tableView.isUserInteractionEnabled = true
+            }
         }
     }
     

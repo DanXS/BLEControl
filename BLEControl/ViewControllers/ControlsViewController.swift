@@ -46,7 +46,7 @@ class ControlsViewController: UIViewController, UITextFieldDelegate, BLEControlD
         // Dispose of any resources that can be recreated.
     }
     
-    func connectionLost(_ sender: Any) {
+    @objc func connectionLost(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -66,10 +66,10 @@ public class BLEControlProtocol {
     }
     
     static func buildLCDCmd(index : UInt8, value: String) -> [UInt8] {
-        assert(value.characters.count <= 200, "Cannot send strings longer than 200 characters")
+        assert(value.count <= 200, "Cannot send strings longer than 200 characters")
         var msg : [UInt8] = []
         msg.append(Command.LCD_TEXT.rawValue)
-        msg.append(UInt8(value.characters.count+2))
+        msg.append(UInt8(value.count+2))
         msg.append(index)
         msg.append(contentsOf: value.utf8CString.map({ (char) -> UInt8 in
             return UInt8(char)
